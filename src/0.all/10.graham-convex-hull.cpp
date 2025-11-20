@@ -1,3 +1,5 @@
+//O(N)
+
 struct pt {
     double x, y;
     bool operator == (pt const& t) const {

@@ -1,3 +1,5 @@
+//find word u in s in O(|s| + |u|)
+
 int L = 0, R = 0;
 for (int i = 1; i < n; i++) {
   if (i > R) {
@@ -13,4 +15,19 @@ for (int i = 1; i < n; i++) {
       z[i] = R-L; R--;
     }
   }
+}
+
+vector<int> search(string &text, string &pattern) {
+    string s = pattern + '$' + text;
+    vector<int> z = zFunction(s);
+    vector<int> pos;
+    int m = pattern.size();
+
+    for (int i = m + 1; i < z.size(); i++) {
+        if (z[i] == m){
+            // pattern match starts here in text
+            pos.push_back(i - m - 1); 
+        }
+    }
+    return pos;
 }

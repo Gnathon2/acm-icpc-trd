@@ -1,3 +1,4 @@
+//O(V*E)
 int n;
 vector<vector<int>> capacity;
 vector<vector<int>> adj;

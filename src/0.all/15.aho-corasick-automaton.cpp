@@ -1,3 +1,5 @@
+
+// find in linear time multiple string in a text 
 // alphabet size
 const int K = 70;
 
