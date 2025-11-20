@@ -22,14 +22,19 @@ def main():
     }
     source_path = os.path.join(os.path.normpath(os.getcwd()), "src")
 
+    kept_topics = [
+        "0.all",
+        "0."
+    ]
+
     dirname = "0.all"
     # for dirname in os.listdir(source_path):
     dirpath = os.path.join(source_path, dirname)
     if not os.path.isdir(dirpath):
         # Might be a file
-        return 
+        return  
     section_name = format_name(remove_number(dirname))
-    print("\section{{{}}}".format(section_name))
+    # print("\section{{{}}}".format(section_name))
 
     for file in os.listdir(dirpath):
         filepath = os.path.join(dirpath, file)
