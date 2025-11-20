@@ -22,29 +22,30 @@ def main():
     }
     source_path = os.path.join(os.path.normpath(os.getcwd()), "src")
 
-    for dirname in os.listdir(source_path):
-        dirpath = os.path.join(source_path, dirname)
-        if not os.path.isdir(dirpath):
-            # Might be a file
-            continue
-        section_name = format_name(remove_number(dirname))
-        print("\section{{{}}}".format(section_name))
+    dirname = "0.all"
+    # for dirname in os.listdir(source_path):
+    dirpath = os.path.join(source_path, dirname)
+    if not os.path.isdir(dirpath):
+        # Might be a file
+        return 
+    section_name = format_name(remove_number(dirname))
+    print("\section{{{}}}".format(section_name))
 
-        for file in os.listdir(dirpath):
-            filepath = os.path.join(dirpath, file)
-            if not os.path.isfile(filepath):
-                # Might be a dir
-                continue
-            filename, fileext = os.path.splitext(file)
-            if fileext not in include_cmds.keys():
-                sys.stderr.write("Found unsupported source file {}. Skipping.\n".format(filepath))
-                continue
-            subsection_name = format_name(remove_number(filename))
-            file_relpath = os.path.join(".", os.path.relpath(filepath)).replace("\\", "/")
-            if fileext == ".tex":
-                print("{}{{\"{}\"}}".format(include_cmds[fileext], file_relpath))
-            else:
-                print("{}{{{}}}{{\"{}\"}}".format(include_cmds[fileext], subsection_name, file_relpath))
+    for file in os.listdir(dirpath):
+        filepath = os.path.join(dirpath, file)
+        if not os.path.isfile(filepath):
+            # Might be a dir
+            continue
+        filename, fileext = os.path.splitext(file)
+        if fileext not in include_cmds.keys():
+            sys.stderr.write("Found unsupported source file {}. Skipping.\n".format(filepath))
+            continue
+        subsection_name = format_name(remove_number(filename))
+        file_relpath = os.path.join(".", os.path.relpath(filepath)).replace("\\", "/")
+        if fileext == ".tex":
+            print("{}{{\"{}\"}}".format(include_cmds[fileext], file_relpath))
+        else:
+            print("{}{{{}}}{{\"{}\"}}".format(include_cmds[fileext], subsection_name, file_relpath))
 
 if __name__ == "__main__":
     main()
