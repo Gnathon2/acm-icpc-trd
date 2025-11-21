@@ -1,11 +1,11 @@
 projectName = test
 
-gen: contents.tex
+gen: content
 	xelatex -jobname=$(projectName) main.tex
 	xelatex -jobname=$(projectName) main.tex
 	xelatex -jobname=$(projectName) main.tex
 
-contents.tex: build_contents.py src/
+content: build_contents.py src/
 	python3 build_contents.py > contents.tex
 
 
